@@ -29,8 +29,7 @@ public class PackGenerationService {
         }
     }
 
-    public static List<Item> generatePacks(InputData inputData) {
-        List<Item> listOfItems = new ArrayList<>();
+    public static void generatePacks(InputData inputData, List<Item> listOfItems) {
         List<Item> items = inputData.getInputItems();
         int maxPackItems = inputData.getInputCondition().getMaxPieces();
         double maxPackWeight = inputData.getInputCondition().getMaxWeight();
@@ -54,10 +53,7 @@ public class PackGenerationService {
 
             itemRemove(items, items.get(i--));
         }
-
-        return listOfItems;
     }
-
 
     public static void itemRemove(List<Item> items, Item item) {
         if (item.getQuantity() == 0) {

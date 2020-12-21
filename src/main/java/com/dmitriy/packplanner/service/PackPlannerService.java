@@ -14,7 +14,8 @@ public class PackPlannerService {
             Pack pack = new Pack();
             pack.setPackId(packId++);
 
-            List<Item> listOfItems = PackGenerationService.generatePacks(inputData);
+            List<Item> listOfItems = new ArrayList<>();
+            PackGenerationService.generatePacks(inputData, listOfItems);
             pack.setListOfItems(listOfItems);
             listOfPacks.add(pack);
         }
