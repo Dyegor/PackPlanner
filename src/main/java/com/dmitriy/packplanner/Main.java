@@ -5,7 +5,7 @@ import com.dmitriy.packplanner.entity.Pack;
 import com.dmitriy.packplanner.service.DataPreparationService;
 import com.dmitriy.packplanner.service.DataValidationService;
 import com.dmitriy.packplanner.service.PackPlannerService;
-import com.dmitriy.packplanner.service.PackGeneratingService;
+import com.dmitriy.packplanner.service.PackGenerationService;
 import com.dmitriy.packplanner.util.InputReader;
 import com.dmitriy.packplanner.util.ResultsPrinter;
 
@@ -18,10 +18,10 @@ public class Main {
             InputData inputData = DataPreparationService.prepareData(inputList);
             DataValidationService.validateInputData(inputData);
 
-            PackGeneratingService.sortItems(inputData.getInputCondition().getSortingType(), inputData.getInputItems());
+            PackGenerationService.sortItems(inputData.getInputCondition().getSortingType(), inputData.getInputItems());
             List<Pack> result = PackPlannerService.fillPacks(inputData);
 
-            PackGeneratingService.sortPacks(inputData.getInputCondition().getSortingType(), result);
+            PackGenerationService.sortPacks(inputData.getInputCondition().getSortingType(), result);
 
             ResultsPrinter.printResults(result);
         } catch (Exception e) {
