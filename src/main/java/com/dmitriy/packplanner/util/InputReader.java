@@ -8,13 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputReader {
+    public final static String INPUT_MESSAGE = "Please, enter your data in the following format:\n" +
+            "[Sort order],[max pieces per pack],[max weight per pack]\n" +
+            "[item id],[item length],[item quantity],[piece weight]\n" +
+            "[item id],[item length],[item quantity],[piece weight]\n" +
+            "[item id],[item length],[item quantity],[piece weight]\n\n" +
+            "Start from next line:\n";
+
     public static List<String> readInput() throws IOException {
-        System.out.println("Please, enter your data in the following format:\n" +
-                "[Sort order],[max pieces per pack],[max weight per pack]\n" +
-                "[item id],[item length],[item quantity],[piece weight]\n" +
-                "[item id],[item length],[item quantity],[piece weight]\n" +
-                "[item id],[item length],[item quantity],[piece weight]\n\n" +
-                "Start from next line:\n");
+        System.out.println(INPUT_MESSAGE);
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         List<String> inputList = new ArrayList<>();
