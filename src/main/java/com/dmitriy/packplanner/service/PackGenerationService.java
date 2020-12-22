@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 public class PackGenerationService {
 
-    public static <T> void sort(String sortingType, List<T> list, Function<T, Integer> comparingFunction) {
+    public static <T> void sortOutputData(String sortingType, List<T> list, Function<T, Integer> comparingFunction) {
         if (!sortingType.equals("NATURAL")) {
             list.sort(Comparator.comparing(comparingFunction));
             if (sortingType.equals("LONG_TO_SHORT")) {

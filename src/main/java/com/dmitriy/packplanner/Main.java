@@ -19,10 +19,10 @@ public class Main {
             InputData inputData = DataPreparationService.prepareData(inputList);
             DataValidationService.validateInputData(inputData);
 
-            PackGenerationService.sort(inputData.getInputCondition().getSortingType(), inputData.getInputItems(), Item::getLength);
+            PackGenerationService.sortOutputData(inputData.getInputCondition().getSortingType(), inputData.getInputItems(), Item::getLength);
             List<Pack> result = PackPlannerService.fillPacks(inputData);
 
-            PackGenerationService.sort(inputData.getInputCondition().getSortingType(), result, Pack::getTotalLength);
+            PackGenerationService.sortOutputData(inputData.getInputCondition().getSortingType(), result, Pack::getTotalLength);
 
             ResultsPrinter.printResults(result);
         } catch (Exception e) {
