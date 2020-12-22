@@ -1,30 +1,20 @@
 package com.dmitriy.packplanner.service;
 
 import com.dmitriy.packplanner.entity.Item;
-import com.dmitriy.packplanner.entity.Pack;
 import com.dmitriy.packplanner.entity.inputEntities.InputData;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 public class PackGenerationService {
 
-    public static void sortItems(String sortingType, List<Item> items) {
+    public static <T> void sort(String sortingType, List<T> list, Function<T, Integer> comparingFunction) {
         if (!sortingType.equals("NATURAL")) {
-            items.sort(Comparator.comparing(Item::getLength));
+            list.sort(Comparator.comparing(comparingFunction));
             if (sortingType.equals("LONG_TO_SHORT")) {
-                Collections.reverse(items);
-            }
-        }
-    }
-
-    public static void sortPacks(String sortingType, List<Pack> listOfPacks) {
-        if (!sortingType.equals("NATURAL")) {
-            listOfPacks.sort(Comparator.comparing(Pack::getTotalLength));
-            if (sortingType.equals("LONG_TO_SHORT")) {
-                Collections.reverse(listOfPacks);
+                Collections.reverse(list);
             }
         }
     }
@@ -44,7 +34,7 @@ public class PackGenerationService {
                 continue;
             }
 
-            int packItemQuantity = compareMaxQuantities(maxPossibleQuantity, maxPackItems, items.get(i).getQuantity());
+            int packItemQuantity = compareQuantities(maxPossibleQuantity, maxPackItems, items.get(i).getQuantity());
 
             listOfItems.add(createNewItem(packItemQuantity, items.get(i)));
 
@@ -61,7 +51,7 @@ public class PackGenerationService {
         }
     }
 
-    public static int compareMaxQuantities(int maxPossibleQuantity, int maxPossibleItems, int itemQuantity) {
+    public static int compareQuantities(int maxPossibleQuantity, int maxPossibleItems, int itemQuantity) {
         return Math.min(Math.min(maxPossibleQuantity, maxPossibleItems), itemQuantity);
     }
 

@@ -1,5 +1,6 @@
 package com.dmitriy.packplanner;
 
+import com.dmitriy.packplanner.entity.Item;
 import com.dmitriy.packplanner.entity.inputEntities.InputData;
 import com.dmitriy.packplanner.entity.Pack;
 import com.dmitriy.packplanner.service.DataPreparationService;
@@ -18,10 +19,10 @@ public class Main {
             InputData inputData = DataPreparationService.prepareData(inputList);
             DataValidationService.validateInputData(inputData);
 
-            PackGenerationService.sortItems(inputData.getInputCondition().getSortingType(), inputData.getInputItems());
+            PackGenerationService.sort(inputData.getInputCondition().getSortingType(), inputData.getInputItems(), Item::getLength);
             List<Pack> result = PackPlannerService.fillPacks(inputData);
 
-            PackGenerationService.sortPacks(inputData.getInputCondition().getSortingType(), result);
+            PackGenerationService.sort(inputData.getInputCondition().getSortingType(), result, Pack::getTotalLength);
 
             ResultsPrinter.printResults(result);
         } catch (Exception e) {
